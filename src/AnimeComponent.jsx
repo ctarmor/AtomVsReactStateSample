@@ -1,15 +1,7 @@
-import { atom, useAtom } from "jotai";
+import { useAtom } from "jotai";
 import { useContext } from "react";
 import AnimeReactContext from "./AnimeReactProviderContext";
-
-const animeAtom = atom('not set');
-animeAtom.onMount = () => {
-  console.log(`>>> ${Date.now()}: anximeAtom mounted.`);
-  return () => {
-    console.log(`>>> ${Date.now()}: anximeAtom UN-mounted.`);
-  };
-};
-animeAtom.debugLabel = ">>> debugLabel: Anime Atom";
+import { animeAtom } from "./AnimeAtom";
 
 export const AnimeComponent = ({ componentId }) => {
   const [anime, setAnime] = useAtom(animeAtom);
