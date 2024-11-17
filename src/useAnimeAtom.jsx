@@ -1,7 +1,7 @@
 import "react";
-import { atom, useAtom, useAtomValue } from "jotai";
+import { atom, useAtom } from "jotai";
 
-const animeAtom = atom();
+export const animeAtom = atom();
 animeAtom.onMount = () => {
   console.log(`>>> ${Date.now()}: anximeAtom mounted.`);
   return () => {
@@ -11,24 +11,13 @@ animeAtom.onMount = () => {
 animeAtom.debugLabel = ">>> debugLabel: Anime Atom";
 
 export const useAnimeAtom = (initialValue) => {
-  const [, setAnime] = useAtom(animeAtom);
+  const [anime, setAnime] = useAtom(animeAtom);
 
   if (initialValue) {
     setAnime(initialValue);
   }
 
+  console.log('>>> useAnimeAtom', anime);
+  
   return useAtom(animeAtom);
-}
-
-export const useAnimeAtomValue = (initialValue) => {
-  const [anime, setAnime] = useAtomValue(animeAtom);
-
-  if (initialValue) {
-    setAnime(initialValue);
-  }
-
-  return {
-      anime, 
-      setAnime,
-  };
 }

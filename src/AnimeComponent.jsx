@@ -1,9 +1,10 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 import AnimeReactContext from "./AnimeReactProviderContext";
 import { useAnimeAtom } from "./useAnimeAtom";
 
 export const AnimeComponent = ({ componentId }) => {
   const [anime, setAnime] = useAnimeAtom('not set');
+  // const [anime, setAnime] = useMemo(() => getAnimeAtom('not set'), []);
   const { ccontextState, setCcontextState } = useContext(AnimeReactContext);
 
   const animeBackground = anime === 'not set' ? '' : 'lightgreen'
@@ -15,7 +16,6 @@ export const AnimeComponent = ({ componentId }) => {
         style={{ margin: '10px' }}
         onClick={() => {
           const title = `State Set by #${componentId} - ${Date.now()}`;
-
           setAnime(title); // Set Atom state
           setCcontextState(title); // Set react state
         }}
