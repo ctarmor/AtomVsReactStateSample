@@ -30,7 +30,6 @@ export const AnimeComponent = ({ componentId }) => {
       <div style={{ border: "1px solid black", padding: "10px" }}>
         <h3>Anime Atom State</h3>
         <div style={{ background: animeBackground }} >{anime}</div>
-        <div style={{ background: 'lightpink' }} >Notice local atom state is shared cross components instance !</div>
       </div>
     </>
   );
