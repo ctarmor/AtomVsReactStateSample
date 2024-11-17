@@ -1,18 +1,9 @@
-import { atom, useAtom } from "jotai";
 import { useContext } from "react";
 import AnimeReactContext from "./AnimeReactProviderContext";
-
-const animeAtom = atom('not set');
-animeAtom.onMount = () => {
-  console.log(`>>> ${Date.now()}: anximeAtom mounted.`);
-  return () => {
-    console.log(`>>> ${Date.now()}: anximeAtom UN-mounted.`);
-  };
-};
-animeAtom.debugLabel = ">>> debugLabel: Anime Atom";
+import { useAnimeAtom } from "./useAnimeAtom";
 
 export const AnimeComponent = ({ componentId }) => {
-  const [anime, setAnime] = useAtom(animeAtom);
+  const [anime, setAnime] = useAnimeAtom('not set');
   const { ccontextState, setCcontextState } = useContext(AnimeReactContext);
 
   const animeBackground = anime === 'not set' ? '' : 'lightgreen'
@@ -38,7 +29,6 @@ export const AnimeComponent = ({ componentId }) => {
       <div style={{ border: "1px solid black", padding: "10px" }}>
         <h3>Anime Atom State</h3>
         <div style={{ background: animeBackground }} >{anime}</div>
-        <div style={{ background: 'lightpink' }} >Notice local atom state is shared cross components instance !</div>
       </div>
     </>
   );
