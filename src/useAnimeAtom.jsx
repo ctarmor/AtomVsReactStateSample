@@ -1,7 +1,7 @@
 import "react";
 import { atom, useAtom } from "jotai";
 
-export const animeAtom = atom();
+const animeAtom = atom();
 animeAtom.onMount = () => {
   console.log(`>>> ${Date.now()}: anximeAtom mounted.`);
   return () => {
@@ -13,11 +13,16 @@ animeAtom.debugLabel = ">>> debugLabel: Anime Atom";
 export const useAnimeAtom = (initialValue) => {
   const [anime, setAnime] = useAtom(animeAtom);
 
-  if (initialValue) {
-    setAnime(initialValue);
-  }
+  // Activating this'll make the hook stop working ??
+  
+  // if (initialValue) {
+  //   setAnime(initialValue);
+  // }
 
   console.log('>>> useAnimeAtom', anime);
   
-  return useAtom(animeAtom);
+  return {
+    anime,
+    setAnime
+  };
 }

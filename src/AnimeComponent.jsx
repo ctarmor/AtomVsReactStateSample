@@ -1,11 +1,16 @@
-import { useContext, useMemo } from "react";
+import { useContext, useEffect } from "react";
 import AnimeReactContext from "./AnimeReactProviderContext";
 import { useAnimeAtom } from "./useAnimeAtom";
 
+// eslint-disable-next-line react/prop-types
 export const AnimeComponent = ({ componentId }) => {
-  const [anime, setAnime] = useAnimeAtom('not set');
-  // const [anime, setAnime] = useMemo(() => getAnimeAtom('not set'), []);
+  const { anime, setAnime } = useAnimeAtom();
   const { ccontextState, setCcontextState } = useContext(AnimeReactContext);
+
+  // Ugly way to initaliza an atom but it's the recommended way ? 
+  useEffect(() => {
+    setAnime('not set');
+  }, [setAnime])
 
   const animeBackground = anime === 'not set' ? '' : 'lightgreen'
   const contextBackground = ccontextState === 'not set' ? '' : 'lightblue'
