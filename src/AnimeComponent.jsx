@@ -1,19 +1,16 @@
-import { atom, useAtom } from "jotai";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import AnimeReactContext from "./AnimeReactProviderContext";
+import { useAnimeAtom } from "./useAnimeAtom";
 
-const animeAtom = atom('not set');
-animeAtom.onMount = () => {
-  console.log(`>>> ${Date.now()}: anximeAtom mounted.`);
-  return () => {
-    console.log(`>>> ${Date.now()}: anximeAtom UN-mounted.`);
-  };
-};
-animeAtom.debugLabel = ">>> debugLabel: Anime Atom";
-
+// eslint-disable-next-line react/prop-types
 export const AnimeComponent = ({ componentId }) => {
-  const [anime, setAnime] = useAtom(animeAtom);
+  const { anime, setAnime } = useAnimeAtom();
   const { ccontextState, setCcontextState } = useContext(AnimeReactContext);
+
+  // Ugly way to initaliza an atom but it's the recommended way ? 
+  useEffect(() => {
+    setAnime('not set');
+  }, [setAnime])
 
   const animeBackground = anime === 'not set' ? '' : 'lightgreen'
   const contextBackground = ccontextState === 'not set' ? '' : 'lightblue'
@@ -24,7 +21,6 @@ export const AnimeComponent = ({ componentId }) => {
         style={{ margin: '10px' }}
         onClick={() => {
           const title = `State Set by #${componentId} - ${Date.now()}`;
-
           setAnime(title); // Set Atom state
           setCcontextState(title); // Set react state
         }}
@@ -38,7 +34,6 @@ export const AnimeComponent = ({ componentId }) => {
       <div style={{ border: "1px solid black", padding: "10px" }}>
         <h3>Anime Atom State</h3>
         <div style={{ background: animeBackground }} >{anime}</div>
-        <div style={{ background: 'lightpink' }} >Notice local atom state is shared cross components instance !</div>
       </div>
     </>
   );

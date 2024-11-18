@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { AnimeComponent } from "./AnimeComponent";
 import AnimeReactProvider from "./AnimeReactProvider";
+import { AnimeAtomProvider } from "./AnimeAtom";
 
 export const AnimeHost = () => {
   const [animeCount, setAnimeCount] = useState([1]);
@@ -14,11 +15,13 @@ export const AnimeHost = () => {
             <th key={k}>
               <div style={{ border: "2px solid black", padding: "30px" }}>
                 <h2>Anime Component {componentId}</h2>
-                <AnimeReactProvider>
-                  <div style={{ border: "2px solid gray", padding: "10px" }}>
-                    <AnimeComponent componentId={componentId} />
-                  </div>
-                </AnimeReactProvider>
+                <AnimeAtomProvider>
+                  <AnimeReactProvider>
+                    <div style={{ border: "2px solid gray", padding: "10px" }}>
+                      <AnimeComponent componentId={componentId} />
+                    </div>
+                  </AnimeReactProvider>
+                </AnimeAtomProvider>
               </div>
             </th>
           );
