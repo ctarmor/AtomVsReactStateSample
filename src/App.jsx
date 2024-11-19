@@ -1,12 +1,16 @@
 import { useState } from "react";
 import "./App.css";
 import { AnimeHost } from "./AnimeHost";
+import { AppHeadingAtom } from "./AppHeadingAtom";
 
 function App() {
   const [showAnime, setShowAnime] = useState(false);
 
   return (
     <div style={{ width: '1600px', alignContent: "top" }}>
+      <AppHeadingAtom />
+      <br />
+      <hr />
       <button
         style={{ width: "600px", alignContent: "top" }}
         onClick={() => {
