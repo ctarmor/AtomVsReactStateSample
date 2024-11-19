@@ -1,10 +1,6 @@
 # Compating Jotai Atom vs React State in localize state
 
-## State across components
+## State across components with app atom
 
-![Example Image](./public/jotai.conponents.png)
-
-## Jotai Atom State disposal
-
-![Example Image](./public/jotai.gc.png)
+![Example Image](./public/localizeatomheader.png)
 
